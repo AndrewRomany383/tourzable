@@ -1,0 +1,24 @@
+version: '3'
+services:
+  pgdb:
+    image: postgres
+    container_name: tourzable
+    restart: always
+    ports:
+      - "6003:5432"
+    environment:
+      - POSTGRES_DB= tourzableDB
+      - POSTGRES_USER= tourzable
+      - POSTGRES_PASSWORD= Y0uCAnN0tP@$$
+
+
+
+
+
+
+
+
+
+
+
+
