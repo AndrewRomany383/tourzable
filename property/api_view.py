@@ -284,8 +284,9 @@ class VisaSubmit(APIView):
 
 
 class Reservation(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request, pk, format=None):
-        Trip.objects.get(pk=pk)
+        get_object_or_404(Trip, pk=pk)
         reservation_serializer = ReservationsSerializer(data=request.data)
         if reservation_serializer.is_valid():
             reservation_serializer2 = reservation_serializer.save(client=request.user)
@@ -320,8 +321,9 @@ def reservation(self, request, pk, format=None):
 
 
 class Review(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request, pk, format=None):
-        Trip.objects.get(pk=pk)
+        get_object_or_404(Trip, pk=pk)
         review_serializer = ReviewSerializer(data=request.data)
         if review_serializer.is_valid():
             review_serializer2 = review_serializer.save(client=request.user)
