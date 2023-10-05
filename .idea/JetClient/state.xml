@@ -935,7 +935,7 @@
                 <option name="id" value="d1a8d355-99b6-4b08-b482-504e26b870e5" />
                 <option name="method" value="POST" />
                 <option name="name" value="favourite" />
-                <option name="url" value="http://127.0.0.1:8000/property/api/list/1/fav" />
+                <option name="url" value="http://127.0.0.1:8000/property/api/list/5/fav" />
               </requestState>
               <requestState>
                 <option name="body">
@@ -1055,7 +1055,7 @@
                 <option name="id" value="43cedf7b-9ed5-40c9-be33-af441bf87081" />
                 <option name="method" value="DELETE" />
                 <option name="name" value="deleting favs from dashboard 1 1" />
-                <option name="url" value="http://127.0.0.1:8000/property/dashboard/reviews/8" />
+                <option name="url" value="http://127.0.0.1:8000/property/dashboard/favorites/1" />
               </requestState>
             </list>
           </option>
