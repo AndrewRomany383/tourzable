@@ -1,20 +1,58 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework.generics import ListAPIView, RetrieveAPIView
-from .models import About, FAQ
-from.serializers import AboutSerializer, FAQSerializer
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
+from .models import About, FAQ, ContactUs, ContactConsultant
+from.serializers import AboutSerializer, FAQSerializer, ContactUsSerializer, ContactConsultantSerializer
 
 
 
-class AboutData(RetrieveAPIView):
-    queryset = About.objects.only('what_we_do', 'our_mission', 'our_goals', 'image')
+class AboutData(ListAPIView):
+    queryset = About.objects.language('en-us').only('id', 'translations')
     serializer_class = AboutSerializer
 
-class FaqData(RetrieveAPIView):
-    queryset = FAQ.objects.only('title', 'description')
+class AboutDataAr(ListAPIView):
+    queryset = About.objects.language('ar-sa').only('id', 'translations')
+    serializer_class = AboutSerializer
+
+class FaqData(ListAPIView):
+    queryset = FAQ.objects.language('en-us').only('id', 'translations')
+    serializer_class = FAQSerializer
+
+class FaqDataAR(ListAPIView):
+    queryset = FAQ.objects.language('ar-sa').only('id', 'translations')
     serializer_class = FAQSerializer
 
 
+class Contactus(CreateAPIView):
+    queryset = ContactUs.objects.only('firstname',
+                                      'lastname',
+                                      'email',
+                                      'number_phone',
+                                      'place',
+                                      'check_in',
+                                      'check_out',
+                                      'adults_number',
+                                      'children_number_and_their_age',
+                                      'infant',
+                                      'room_number',
+                                      'notes')
+    serializer_class = ContactUsSerializer
+
+
+class Contactconsultant(CreateAPIView):
+    queryset = ContactConsultant.objects.only('firstname',
+                                              'lastname',
+                                              'email',
+                                              'number_phone',
+                                              'place',
+                                              'check_in',
+                                              'check_out',
+                                              'adults_number',
+                                              'children_number_and_their_age',
+                                              'infant',
+                                              'room_number',
+                                              'notes')
+    serializer_class = ContactConsultantSerializer
 
 """@api_view(['GET'])
 def faq(request):

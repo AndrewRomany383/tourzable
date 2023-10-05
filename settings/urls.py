@@ -6,8 +6,9 @@ app_name = 'settings'
 
 urlpatterns = [
     path('', api_view.home, name='home'),
-    path('home_search/<str:query>', api_view.home_search, name='home_search'),
-    path('category_filter/<str:category>', api_view.category_filter, name='category_filter')
+    path('ar', api_view.home_ar, name='home_ar'),
+    path('category_filter/<str:query>', api_view.home_search_and_category_filter, name='category_filter'),
+    path('category_filter_ar/<str:query>', api_view.home_search_and_category_filter_ar, name='category_filter_ar')
 ]
 
 

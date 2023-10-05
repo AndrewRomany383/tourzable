@@ -1,21 +1,31 @@
 from rest_framework import serializers
-from .models import About, FAQ
+from parler_rest.serializers import TranslatableModelSerializer
+from .models import About, FAQ, ContactUs, ContactConsultant
 
 
-class AboutSerializer(serializers.ModelSerializer):
+
+class AboutSerializer(TranslatableModelSerializer):
     class Meta:
         model = About
-        exclude = ['id']
+        fields = '__all__'
 
 
-class FAQSerializer(serializers.ModelSerializer):
+class FAQSerializer(TranslatableModelSerializer):
     class Meta:
         model = FAQ
-        exclude = ['id']
+        fields = '__all__'
 
 
+class ContactUsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactUs
+        fields = '__all__'
 
 
+class ContactConsultantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactConsultant
+        fields = '__all__'
 
 
 

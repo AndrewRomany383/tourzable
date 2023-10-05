@@ -5,14 +5,16 @@ from .models import Account
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['username',
+        fields = ['id',
+                  'username',
                   'first_name',
                   'last_name',
                   'password',
                   'email',
                   'phone_number',
                   'profile_image',
-                  'language']
+                  'language',
+                  'reservations']
         extra_kwargs = {
             'password':{'write_only':True}
         }
@@ -30,7 +32,8 @@ class AccountSerializer(serializers.ModelSerializer):
 class AccountPorfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['username',
+        fields = ['id',
+                  'username',
                   'first_name',
                   'last_name',
                   'email',

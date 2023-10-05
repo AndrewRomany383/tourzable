@@ -43,14 +43,21 @@ class SignUp(APIView):
 
 
 class Login(APIView):
+    def get(self, request, format=None):
+        if request.user.is_authenticated:
+            serializer = AccountPorfileSerializer(request.user, context={'request': request})
+            return Response({'profile': serializer.data, 'msg': 'Login successful'}, status=status.HTTP_202_ACCEPTED)
+        else:
+            return Response({'errors': 'password or email is not valid'}, status=status.HTTP_404_NOT_FOUND)
     def post(self, request, format=None):
         email = request.data.get('email')
         password = request.data.get('password')
         if not email or not password:
             return Response(status=status.HTTP_404_NOT_FOUND)
         user = authenticate(email=email, password=password, id=request.user.pk)
+        token = get_tokens_for_user(user)
         if user is not None:
-            return Response({'token':get_tokens_for_user(user), 'msg':'Login successful'}, status=status.HTTP_202_ACCEPTED)
+            return Response({'token':token, 'msg':'Login successful','user':AccountPorfileSerializer(request.user, context={'request': request}).data}, status=status.HTTP_202_ACCEPTED)
         else:
             return Response({'errors':'password or email is not valid'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -94,7 +101,8 @@ def register(request):
 
 
 class AccountView(RetrieveUpdateAPIView):
-    queryset = Account.objects.only('username',
+    queryset = Account.objects.only('id',
+                                    'username',
                                     'first_name',
                                     'last_name',
                                     'email',
